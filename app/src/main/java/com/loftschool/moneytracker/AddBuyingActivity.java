@@ -19,8 +19,6 @@ public class AddBuyingActivity extends AppCompatActivity {
     EditText titleOfBuying;
     EditText priceOfBuying;
     ImageButton addBtn;
-    boolean OnOffbtn1;
-    boolean OnOffbtn2;
     String rouble = "\u20BD";
 
     @Override
@@ -31,8 +29,6 @@ public class AddBuyingActivity extends AppCompatActivity {
         titleOfBuying = findViewById(R.id.titleOfBuying_et);
         priceOfBuying = findViewById(R.id.priceOfBuying_et);
         addBtn = findViewById(R.id.add_btn);
-        addBtn.setEnabled(false);
-
 
         titleOfBuying.addTextChangedListener(new TextWatcher() {
             @Override
@@ -42,20 +38,7 @@ public class AddBuyingActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtils.isEmpty(s)){
-                    OnOffbtn1 = true;
-                }else OnOffbtn1 = false;
-
-                if (OnOffbtn2 && OnOffbtn1){
-                    addBtn.setEnabled(true);
-                    addBtn.setColorFilter(Color.argb(255,0,0,0));
-                } else {
-                    addBtn.setColorFilter(Color.argb(255,149,152,154));
-                    addBtn.setEnabled(false);
-                }
-
-
-
+               changeButtonState();
             }
 
             @Override
@@ -71,19 +54,7 @@ public class AddBuyingActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtils.isEmpty(s)){
-                    OnOffbtn2 = true;
-                }else OnOffbtn2 = false;
-
-                if (OnOffbtn2 && OnOffbtn1){
-                    addBtn.setEnabled(true);
-                    addBtn.setColorFilter(Color.argb(255,0,0,0));
-                } else{
-                    addBtn.setColorFilter(Color.argb(255,149,152,154));
-                    addBtn.setEnabled(false);
-                }
-
-
+               changeButtonState();
             }
 
             @Override
@@ -139,5 +110,15 @@ public class AddBuyingActivity extends AppCompatActivity {
 
     public void onClick(View view){
         Toast.makeText(this, "The button is work", Toast.LENGTH_SHORT).show();
+    }
+
+    private void changeButtonState (){
+        if (!titleOfBuying.getText().toString().isEmpty() && !priceOfBuying.getText().toString().isEmpty()){
+            addBtn.setEnabled(true);
+            addBtn.setColorFilter(Color.argb(255,0,0,0));
+        } else{
+            addBtn.setColorFilter(Color.argb(255,149,152,154));
+            addBtn.setEnabled(false);
+        }
     }
 }
