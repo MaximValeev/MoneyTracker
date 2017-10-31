@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.loftschool.moneytracker.AddBuyingActivity"
+    android:background="@drawable/bg_pattern">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drop_shadow_white_bg"
+        android:elevation="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteBg"
+            android:padding="24dp">
+
+            <EditText
+                android:id="@+id/titleOfBuying_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint="@string/titleOfBuying"
+                android:inputType="text"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:textSize="@dimen/mainTextSize" />
+
+            <EditText
+                android:id="@+id/priceOfBuying_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@null"
+                android:hint="@string/defaultPriceHint"
+                android:inputType="number"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:textAlignment="center"
+                android:textSize="@dimen/mainTextSize" />
+
+            <ImageButton
+                android:id="@+id/add_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:background="@null"
+                android:tint="@null"
+                android:onClick="onClick"
+                android:src="@drawable/ic_cross" />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
