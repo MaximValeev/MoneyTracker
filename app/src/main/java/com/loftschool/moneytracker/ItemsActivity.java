@@ -12,10 +12,9 @@ public class ItemsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items);
 
-
         RecyclerView recycler = findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setAdapter(new ItemsAdapter(this.getResources()));
+        recycler.setAdapter(new ItemsAdapter(this));
     }
 
  }
