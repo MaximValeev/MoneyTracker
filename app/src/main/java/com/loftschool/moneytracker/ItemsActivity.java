@@ -15,7 +15,7 @@ public class ItemsActivity extends AppCompatActivity {
 
         RecyclerView recycler = findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setAdapter(new ItemsAdapter(getString(R.string.currency_symbol)));
+        recycler.setAdapter(new ItemsAdapter(this.getResources()));
     }
 
  }

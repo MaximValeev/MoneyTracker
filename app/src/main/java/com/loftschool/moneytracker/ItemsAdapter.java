@@ -1,5 +1,6 @@
 package com.loftschool.moneytracker;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -20,8 +21,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     private String currency;
 
-    ItemsAdapter(String currency) {
-        this.currency = currency;
+    ItemsAdapter(Resources res) {
+        this.currency = res.getString(R.string.currency_symbol);
+
 
         items.add(new Item("Молоко", 35));
         items.add(new Item("Зубная щетка", 1500));
