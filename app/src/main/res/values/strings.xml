@@ -3,4 +3,17 @@
     <string name="titleOfBuying">Название</string>
     <string name="defaultPriceHint">0₽</string>
     <string name="currency_symbol">₽</string>
+
+    <string name="tab_expenses">Расходы</string>
+    <string name="tab_incomes">Доходы</string>
+    <string name="tab_balance">Баланс</string>
+
+    <string-array name="tabs_titles">
+        <item>@string/tab_expenses</item>
+        <item>@string/tab_incomes</item>
+        <item>@string/tab_balance</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
