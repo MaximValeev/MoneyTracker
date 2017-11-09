@@ -1,6 +1,6 @@
 package com.loftschool.moneytracker;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -19,11 +19,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     private List<Item> items = new ArrayList<>();
 
-    private String currency;
+    private Context context;
 
-    ItemsAdapter(Resources res) {
-        this.currency = res.getString(R.string.currency_symbol);
-
+    ItemsAdapter(Context context) {
+        this.context = context;
 
         items.add(new Item("Молоко", 35));
         items.add(new Item("Зубная щетка", 1500));
@@ -52,7 +51,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Item item = items.get(position);
-        holder.bind(item, currency);
+        holder.bind(item, context);
     }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -67,8 +66,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
         }
 
-        void bind(Item item, String currency){
-            Spannable colorCurrency = new SpannableString(String.valueOf(item.getPrice()) + currency);
+        void bind(Item item, Context context){
+            Spannable colorCurrency = new SpannableString(String.valueOf(item.getPrice()) + context.getString(R.string.currency_symbol));
             colorCurrency.setSpan(new ForegroundColorSpan(Color.rgb(109, 111, 114)),colorCurrency.length()-1, colorCurrency.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             name.setText(item.getName());

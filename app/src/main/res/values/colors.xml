@@ -10,4 +10,8 @@
 
     <color name="white">#fff</color>
     <color name="textHintColor">#95989a</color>
+
+    <color name="tabIndicator">#EBF596</color>
+    <color name="tabActiveText">@color/white</color>
+    <color name="tabInactiveText">#dbece6</color>
 </resources>

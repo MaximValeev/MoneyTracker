@@ -21,7 +21,7 @@ public class AddBuyingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_buying);
+        setContentView(R.layout.add_buying_activity);
 
         titleOfBuying = findViewById(R.id.titleOfBuying_et);
         priceOfBuying = findViewById(R.id.priceOfBuying_et);
