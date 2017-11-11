@@ -21,20 +21,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     private Context context;
 
+    public void setItems(List<Item> items){
+        this.items = items;
+        notifyDataSetChanged();
+    }
+
     ItemsAdapter(Context context) {
         this.context = context;
-
-        items.add(new Item("Молоко", 35));
-        items.add(new Item("Зубная щетка", 1500));
-        items.add(new Item("Сковородка с антипригарным покрытием", 55));
-        items.add(new Item("Проезд на месяц", 3500));
-        items.add(new Item("Курс на LoftSchool", 12000));
-        items.add(new Item("Nintendo Switch", 22000));
-        items.add(new Item("На телефон", 500));
-        items.add(new Item("Кино", 1100));
-        items.add(new Item("SSD", 3200));
-        items.add(new Item("На НГ", 2000));
-        items.add(new Item("Ремонт телефона", 4000));
     }
 
     @Override
@@ -67,10 +60,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         }
 
         void bind(Item item, Context context){
-            Spannable colorCurrency = new SpannableString(String.valueOf(item.getPrice()) + context.getString(R.string.currency_symbol));
+            Spannable colorCurrency = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
             colorCurrency.setSpan(new ForegroundColorSpan(Color.rgb(109, 111, 114)),colorCurrency.length()-1, colorCurrency.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            name.setText(item.getName());
+            name.setText(item.name);
             price.setText(colorCurrency);
         }
     }

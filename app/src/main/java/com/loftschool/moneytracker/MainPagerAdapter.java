@@ -29,10 +29,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case PAGE_EXPENSES:
-                return ItemsFragment.CreateItemsFragment(ItemsFragment.TYPE_EXPENSES);
+                return ItemsFragment.CreateItemsFragment(Item.TYPE_EXPENSES);
 
             case PAGE_INCOMES:
-                return ItemsFragment.CreateItemsFragment(ItemsFragment.TYPE_INCOME);
+                return ItemsFragment.CreateItemsFragment(Item.TYPE_INCOME);
 
             case PAGE_BALANCE:
                 BalanceFragment fragment = new BalanceFragment();
@@ -54,7 +54,6 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return tabsTitles[position];
-
 
     }
 }
