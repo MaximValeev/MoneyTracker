@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#95c9b8</color>
+    <color name="colorPrimaryDark">#88B6A7</color>
+    <color name="colorAccent">#EBF596</color>
     <color name="text_background">#84c0c5</color>
+
+    <color name="floating_button_color">#15A599</color>
 
     <color name="item_name_background">#FCC418</color>
     <color name="item_price_background">#E9B11C</color>

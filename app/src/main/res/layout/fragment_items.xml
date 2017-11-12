@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.loftschool.moneytracker.ItemsFragment"
     android:background="@drawable/bg_pattern">
 
@@ -15,6 +16,17 @@
         android:paddingRight="5dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp" />
-
+    
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_cross_fab"
+        android:tint="@color/white"
+        app:fabSize="normal"
+        android:scaleType="center"
+        app:backgroundTint="@color/floating_button_color"
+        android:layout_margin="18dp"/>
 
 </FrameLayout>
