@@ -1,11 +1,13 @@
 package com.loftschool.moneytracker;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -70,7 +72,20 @@ public class ItemsFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler.setAdapter(adapter);
 
+        FloatingActionButton fab = view.findViewById(R.id.fab_add);
+
         loadItems();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddBuyingActivity.class);
+                intent.putExtra(AddBuyingActivity.EXTRA_TYPE, type);
+                startActivityForResult(intent, AddBuyingActivity.RC_ADD_ITEM);
+            }
+        });
+
+
     }
 
     private void loadItems(){
@@ -141,7 +156,17 @@ public class ItemsFragment extends Fragment {
         Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
     }
 
-//    private void loadItems(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==AddBuyingActivity.RC_ADD_ITEM && resultCode == AddBuyingActivity.RESULT_OK){
+            Item item = (Item) data.getSerializableExtra(AddBuyingActivity.RESULT_ITEM);
+            Toast.makeText(getContext(), item.name + " " + item.price, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //    private void loadItems(){
 //
 //        new AsyncTask<Void, Void, List<Item>>() {
 //

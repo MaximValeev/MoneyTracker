@@ -1,10 +1,12 @@
 package com.loftschool.moneytracker;
 
+import java.io.Serializable;
+
 /**
  * Created by Max on 02.11.2017.
  */
 
-public class Item {
+public class Item implements Serializable{
 
     static final String TYPE_UNKNOWN = "unknown";
     static final String TYPE_EXPENSES = "expense";

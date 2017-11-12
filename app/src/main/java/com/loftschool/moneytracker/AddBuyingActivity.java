@@ -1,8 +1,10 @@
 package com.loftschool.moneytracker;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,10 +14,15 @@ import android.widget.Toast;
 
 public class AddBuyingActivity extends AppCompatActivity {
 
+    public static final String EXTRA_TYPE = "type";
+    public static final String RESULT_ITEM = "item";
+    public static final int RC_ADD_ITEM = 99;
+
     EditText titleOfBuying;
     EditText priceOfBuying;
     ImageButton addBtn;
-    String rouble = getResources().getString(R.string.currency_symbol);
+    String rouble;
+    String type;
 
 
     @Override
@@ -23,9 +30,18 @@ public class AddBuyingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_buying_activity);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        rouble = getResources().getString(R.string.currency_symbol);
+
         titleOfBuying = findViewById(R.id.titleOfBuying_et);
         priceOfBuying = findViewById(R.id.priceOfBuying_et);
         addBtn = findViewById(R.id.add_btn);
+
+        type = getIntent().getStringExtra(EXTRA_TYPE);
 
         titleOfBuying.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,6 +94,18 @@ public class AddBuyingActivity extends AppCompatActivity {
             }
         });
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(RESULT_ITEM, new Item(titleOfBuying.getText().toString(),
+                      Integer.parseInt(priceOfBuying.getText().toString().replace(rouble, "")),
+                        type));
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -103,10 +131,6 @@ public class AddBuyingActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    public void onClick(View view){
-        Toast.makeText(this, "The button is work", Toast.LENGTH_SHORT).show();
     }
 
     private void changeButtonState (){
