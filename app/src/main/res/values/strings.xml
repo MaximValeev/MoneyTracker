@@ -8,6 +8,8 @@
     <string name="tab_incomes">Доходы</string>
     <string name="tab_balance">Баланс</string>
 
+    <string name="fragment_type">TYPE</string>
+
     <string-array name="tabs_titles">
         <item>@string/tab_expenses</item>
         <item>@string/tab_incomes</item>
