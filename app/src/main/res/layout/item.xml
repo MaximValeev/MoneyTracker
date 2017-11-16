@@ -4,6 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/item_bg"
     android:minHeight="@dimen/minHeightItemViewInCostsList"
     android:layout_margin="5dp">
 
@@ -13,8 +14,7 @@
         android:textSize="@dimen/mainTextSize"
         tools:text="Молоко"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:background="@color/item_name_background"/>
+        android:layout_weight="1" />
 
     <TextView
         style="@style/ItemText"
@@ -23,7 +23,7 @@
         tools:text="35 ₽"
         android:layout_width="wrap_content"
         android:layout_weight="0"
-        android:background="@color/item_price_background"/>
+        android:background="@color/item_color_shadow"/>
 
 
 
