@@ -11,8 +11,10 @@
     <TextView
         style="@style/ItemText"
         android:id="@+id/item_name"
+        android:gravity="start|center"
         android:textSize="@dimen/mainTextSize"
         tools:text="Молоко"
+        android:fontFamily="sans-serif-light"
         android:layout_width="match_parent"
         android:layout_weight="1" />
 

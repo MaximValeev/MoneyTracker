@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MoneyTracker</string>
+    <string name="app_name">Учёт бюджета</string>
     <string name="titleOfBuying">Название</string>
     <string name="defaultPriceHint">0₽</string>
     <string name="currency_symbol">₽</string>

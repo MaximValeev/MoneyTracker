@@ -100,11 +100,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         }
 
         void bind(final Item item, Context context, final int position, boolean selected, final ItemsAdapterListener listener){
-            Spannable colorCurrency = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
-            colorCurrency.setSpan(new ForegroundColorSpan(Color.rgb(109, 111, 114)),colorCurrency.length()-1, colorCurrency.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            Spannable colorCurrency = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
+            String currencyPlus = String.valueOf(item.price) + context.getString(R.string.currency_symbol);
+//            colorCurrency.setSpan(new ForegroundColorSpan(Color.rgb(109, 111, 114)),colorCurrency.length()-1, colorCurrency.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             name.setText(item.name);
-            price.setText(colorCurrency);
+            price.setText(currencyPlus);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
