@@ -50,6 +50,8 @@ public class ItemsFragment extends Fragment {
 
     private ActionMode actionMode;
 
+    FloatingActionButton fab;
+
     public static ItemsFragment CreateItemsFragment(String type){
         ItemsFragment fragment = new ItemsFragment();
         Bundle bundle = new Bundle();
@@ -85,6 +87,8 @@ public class ItemsFragment extends Fragment {
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler.setAdapter(adapter);
 
+        fab = view.findViewById(R.id.fab_add);
+
         adapter.setListener(new ItemsAdapterListener() {
             @Override
             public void onItemClick(Item item, int position) {
@@ -113,9 +117,8 @@ public class ItemsFragment extends Fragment {
             }
         });
 
-        FloatingActionButton fab = view.findViewById(R.id.fab_add);
-
         loadItems();
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,6 +215,7 @@ public class ItemsFragment extends Fragment {
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = mode.getMenuInflater();
             inflater.inflate(R.menu.items_menu, menu);
+            fab.setVisibility(View.GONE);
             return true;
         }
 
@@ -235,6 +239,7 @@ public class ItemsFragment extends Fragment {
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             actionMode = null;
+            fab.setVisibility(View.VISIBLE);
             adapter.clearSelections();
         }
 
@@ -247,8 +252,8 @@ public class ItemsFragment extends Fragment {
             public void onPositiveClick() {
                 for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i-- ){
                     adapter.remove(adapter.getSelectedItems().get(i));
-                    actionMode.finish();
                 }
+                actionMode.finish();
             }
 
             @Override
