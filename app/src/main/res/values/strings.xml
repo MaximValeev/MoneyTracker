@@ -22,4 +22,5 @@
     <string name="menu_item_delete">Удалить</string>
     <string name="confirm_remove">Удалить объект?</string>
     <string name="selected_items">Выбрано &#160;</string>
+    <string name="welcomeMessage">Ваш незаменимый помощник в управлении бюджетом</string>
 </resources>
