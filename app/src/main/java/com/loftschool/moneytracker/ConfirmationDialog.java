@@ -6,10 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-
-/**
- * Created by Max on 16.11.2017.
- */
+import android.util.Log;
 
 public class ConfirmationDialog extends DialogFragment{
     private ConfirmDialogListener listener;

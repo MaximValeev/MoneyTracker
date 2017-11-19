@@ -13,10 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Max on 11.11.2017.
- */
-
 public class App extends Application {
 
     private Api api;

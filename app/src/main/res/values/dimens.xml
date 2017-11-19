@@ -3,4 +3,10 @@
     <dimen name="mainTextSize">20sp</dimen>
     <dimen name="minHeightItemViewInCostsList">65dp</dimen>
     <dimen name="priceInListCosts">24sp</dimen>
+    <dimen name="fragment_list_paddingStart">5dp</dimen>
+    <dimen name="fragment_list_paddingEnd">5dp</dimen>
+    <dimen name="fragment_list_paddingTop">15dp</dimen>
+    <dimen name="fragment_list_paddingBottom">15dp</dimen>
+    <dimen name="floating_action_button_marginEnd">18dp</dimen>
+    <dimen name="floating_action_button_marginBottom">18dp</dimen>
 </resources>

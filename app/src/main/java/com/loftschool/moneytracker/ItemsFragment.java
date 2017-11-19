@@ -1,25 +1,17 @@
 package com.loftschool.moneytracker;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +23,6 @@ import android.widget.Toast;
 import com.loftschool.moneytracker.api.Api;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsFragment extends Fragment {
@@ -40,8 +31,6 @@ public class ItemsFragment extends Fragment {
     private static final int LOADER_ADD = 1;
 
     private static final String KEY_TYPE = "TYPE";
-
-    private static final String TAG = "MY LOGG";
 
     private String type = Item.TYPE_UNKNOWN;
 

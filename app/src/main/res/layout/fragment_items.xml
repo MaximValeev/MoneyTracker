@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp" />
+        android:paddingStart="@dimen/fragment_list_paddingStart"
+        android:paddingEnd="@dimen/fragment_list_paddingEnd"
+        android:paddingTop="@dimen/fragment_list_paddingTop"
+        android:paddingBottom="@dimen/fragment_list_paddingBottom" />
     
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
@@ -27,7 +27,7 @@
         app:fabSize="normal"
         android:scaleType="center"
         app:backgroundTint="@color/colorAccent"
-        android:layout_marginRight="18dp"
-        android:layout_marginBottom="18dp"/>
+        android:layout_marginEnd="@dimen/floating_action_button_marginEnd"
+        android:layout_marginBottom="@dimen/floating_action_button_marginBottom"/>
 
 </FrameLayout>
