@@ -6,6 +6,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -69,9 +70,9 @@ public class AuthActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onLoadFinished(Loader<AuthResult> loader, AuthResult data) {
-                        if(result != null && result.isSuccess()){
-                            ((App)getApplication()).setAuthToken(result.getSignInAccount().getIdToken());
+                    public void onLoadFinished(Loader<AuthResult> loader, AuthResult result) {
+                        if(result != null){
+                            ((App)getApplication()).setAuthToken(result.authToken);
                             finish();
                         } else showError();
                     }

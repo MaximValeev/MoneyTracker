@@ -2,6 +2,7 @@ package com.loftschool.moneytracker;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -81,6 +82,6 @@ public class App extends Application {
     }
 
     private static final String PREFERENCES_SESSION = "session";
-    private static final String KEY_AUTH_TOKEN = "auth_token";
+    private static final String KEY_AUTH_TOKEN = "auth-token";
 
 }
