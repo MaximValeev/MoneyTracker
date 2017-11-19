@@ -7,6 +7,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         this.items = items;
         notifyDataSetChanged();
     }
+
+    public void updateId(){
+        notifyDataSetChanged();
+    }
+
 
     public void setListener(ItemsAdapterListener listener){
         this.listener = listener;
@@ -83,6 +89,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
     Item remove(int pos){
         final  Item item = items.remove(pos);
+
         notifyItemRemoved(pos);
         return item;
     }

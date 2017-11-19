@@ -1,6 +1,10 @@
 package com.loftschool.moneytracker;
 
+import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +16,23 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.loftschool.moneytracker.api.AddResult;
+import com.loftschool.moneytracker.api.Api;
+
+import java.io.IOException;
+
 public class AddBuyingActivity extends AppCompatActivity {
 
     public static final String EXTRA_TYPE = "type";
     public static final String RESULT_ITEM = "item";
     public static final int RC_ADD_ITEM = 99;
+    private static final int LOADER_ADD = 1;
+
+    ItemsAdapter adapter;
+
+    private Api api;
+
+    Context context;
 
     EditText titleOfBuying;
     EditText priceOfBuying;
@@ -29,6 +45,10 @@ public class AddBuyingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_buying_activity);
+
+        context = this;
+
+        adapter = new ItemsAdapter(context);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -101,6 +121,7 @@ public class AddBuyingActivity extends AppCompatActivity {
                 resultIntent.putExtra(RESULT_ITEM, new Item(titleOfBuying.getText().toString(),
                       Integer.parseInt(priceOfBuying.getText().toString().replace(rouble, "")),
                         type));
+                resultIntent.putExtra(EXTRA_TYPE, type);
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }
@@ -143,5 +164,8 @@ public class AddBuyingActivity extends AppCompatActivity {
         }
     }
 
+            private void showError(String error){
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+    }
 
 }
