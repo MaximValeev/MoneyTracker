@@ -29,6 +29,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         notifyDataSetChanged();
     }
 
+    public void updateId(){
+        notifyDataSetChanged();
+    }
+
     public void setListener(ItemsAdapterListener listener){
         this.listener = listener;
     }
