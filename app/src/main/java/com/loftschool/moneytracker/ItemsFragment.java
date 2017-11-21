@@ -119,7 +119,6 @@ public class ItemsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddBuyingActivity.class);
                 intent.putExtra(AddBuyingActivity.EXTRA_TYPE, type);
-                Log.d(TAG, "onClick: type = " + type);
                 startActivityForResult(intent, AddBuyingActivity.RC_ADD_ITEM);
             }
         });
