@@ -7,7 +7,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import java.util.List;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     private List<Item> items = new ArrayList<>();
-    private ItemsAdapterListener listener;
+    private ItemsAdapterListener listener = null;
     private SparseBooleanArray selectedItems = new SparseBooleanArray();
 
     private Context context;
@@ -101,8 +100,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         }
 
         void bind(final Item item, Context context, final int position, boolean selected, final ItemsAdapterListener listener){
-            Spannable currencyPlus = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
-            currencyPlus.setSpan(new RelativeSizeSpan(0.75f),currencyPlus.length()-1, currencyPlus.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            Spannable colorCurrency = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
+            String currencyPlus = String.valueOf(item.price) + context.getString(R.string.currency_symbol);
+//            colorCurrency.setSpan(new ForegroundColorSpan(Color.rgb(109, 111, 114)),colorCurrency.length()-1, colorCurrency.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             name.setText(item.name);
             price.setText(currencyPlus);

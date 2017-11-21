@@ -20,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.loftschool.moneytracker.api.AddResult;
 import com.loftschool.moneytracker.api.Api;
+import com.loftschool.moneytracker.api.Result;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +31,8 @@ public class ItemsFragment extends Fragment {
 
     private static final int LOADER_ITEMS = 0;
     private static final int LOADER_ADD = 1;
+    private static final int LOADER_REMOVE = 2;
+
 
     private static final String KEY_TYPE = "TYPE";
 
@@ -62,6 +66,7 @@ public class ItemsFragment extends Fragment {
         adapter = new ItemsAdapter(getContext());
         api = ((App) getActivity().getApplication()).getApi();
     }
+    
 
     @Nullable
     @Override
@@ -114,6 +119,7 @@ public class ItemsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddBuyingActivity.class);
                 intent.putExtra(AddBuyingActivity.EXTRA_TYPE, type);
+                Log.d(TAG, "onClick: type = " + type);
                 startActivityForResult(intent, AddBuyingActivity.RC_ADD_ITEM);
             }
         });
@@ -155,17 +161,18 @@ public class ItemsFragment extends Fragment {
         }).forceLoad();
     }
 
-    private void addItems(final Item item){
-        getLoaderManager().restartLoader(LOADER_ADD, null, new LoaderManager.LoaderCallbacks<Item> () {
+    private void addItem(final Item item){
+        getLoaderManager().restartLoader(LOADER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>(){
+
             @Override
-            public Loader<Item> onCreateLoader(int id, Bundle args) {
-                return new AsyncTaskLoader<Item>(getContext()) {
+            public Loader<AddResult> onCreateLoader(int id, Bundle args) {
+                return new AsyncTaskLoader<AddResult>(getContext()) {
                     @Override
-                    public Item loadInBackground() {
+                    public AddResult loadInBackground() {
                         try {
-                            return api.add(item.name, item.price, item.type).execute().body();
+                            return api.add(item.price, item.name, item.type).execute().body();
                         } catch (IOException e) {
-                            showError(e.getMessage());
+                            e.printStackTrace();
                             return null;
                         }
                     }
@@ -173,14 +180,40 @@ public class ItemsFragment extends Fragment {
             }
 
             @Override
-            public void onLoadFinished(Loader<Item> loader, Item item1) {
-                if(item == null){
-                    showError("произошла ошибка");
-                }
+            public void onLoadFinished(Loader<AddResult> loader, AddResult data) {
+                adapter.updateId();
             }
 
             @Override
-            public void onLoaderReset(Loader<Item> loader) {
+            public void onLoaderReset(Loader<AddResult> loader) {
+
+            }
+        }).forceLoad();
+    }
+
+    private void removeItem(final Item item){
+        getLoaderManager().restartLoader(LOADER_REMOVE, null, new LoaderManager.LoaderCallbacks<Result>() {
+            @Override
+            public Loader<Result> onCreateLoader(final int id, Bundle args) {
+                return new AsyncTaskLoader<Result>(getContext()) {
+                    @Override
+                    public Result loadInBackground() {
+                        try {
+                            return api.remove(item.id).execute().body();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                };
+            }
+
+            @Override
+            public void onLoadFinished(Loader<Result> loader, Result data) {
+            }
+
+            @Override
+            public void onLoaderReset(Loader<Result> loader) {
             }
         }).forceLoad();
     }
@@ -195,6 +228,7 @@ public class ItemsFragment extends Fragment {
 
         if(requestCode==AddBuyingActivity.RC_ADD_ITEM && resultCode == AddBuyingActivity.RESULT_OK){
             Item item = (Item) data.getSerializableExtra(AddBuyingActivity.RESULT_ITEM);
+            addItem(item);
             Toast.makeText(getContext(), item.name + " " + item.price, Toast.LENGTH_SHORT).show();
         }
     }
@@ -240,7 +274,7 @@ public class ItemsFragment extends Fragment {
             @Override
             public void onPositiveClick() {
                 for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i-- ){
-                    adapter.remove(adapter.getSelectedItems().get(i));
+                    removeItem(adapter.remove(adapter.getSelectedItems().get(i)));
                 }
                 actionMode.finish();
             }

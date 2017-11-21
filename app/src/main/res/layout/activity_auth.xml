@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.loftschool.moneytracker.AuthActivity"
+    android:background="@color/colorPrimary">
+
+
+
+        <ImageView
+            android:id="@+id/welcome_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcome_logo"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginEnd="77dp"
+        android:layout_marginStart="77dp"
+        android:text="@string/welcomeMessage"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gplus_button" />
+
+        <ImageView
+            android:id="@+id/bg_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_intro"
+            android:layout_alignParentBottom="true"
+            android:scaleType="fitXY"
+            />
+</RelativeLayout>
