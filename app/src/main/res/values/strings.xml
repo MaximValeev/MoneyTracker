@@ -12,6 +12,8 @@
 
     <string name="fragment_type">TYPE</string>
 
+    <string name="price">%1$d&#8381;</string>
+
     <string-array name="tabs_titles">
         <item>@string/tab_expenses</item>
         <item>@string/tab_incomes</item>
@@ -23,4 +25,10 @@
     <string name="confirm_remove">Удалить объект?</string>
     <string name="selected_items">Выбрано &#160;</string>
     <string name="welcomeMessage">Ваш незаменимый помощник в управлении бюджетом</string>
+
+    <string name="error_balance_loading">"Ошибка загрузки баланса"</string>
+
+    <string name="balance_total">Ваш баланс</string>
+    <string name="balance_income">доход</string>
+    <string name="balance_expense">расход</string>
 </resources>

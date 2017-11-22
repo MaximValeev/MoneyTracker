@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,8 +41,9 @@ public class ItemsFragment extends Fragment {
 
     private ItemsAdapter adapter;
     private Api api;
-
     private ActionMode actionMode;
+
+    SwipeRefreshLayout refresh;
 
     FloatingActionButton fab;
 
@@ -76,6 +78,14 @@ public class ItemsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        refresh = view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadItems();
+            }
+        });
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -146,6 +156,7 @@ public class ItemsFragment extends Fragment {
 
             @Override
             public void onLoadFinished(Loader<List<Item>> loader, List<Item> items) {
+                refresh.setRefreshing(false);
                 if (items == null){
                     showError("произошла ошибка");
                 } else {

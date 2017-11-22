@@ -1,11 +1,9 @@
 package com.loftschool.moneytracker;
 
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
@@ -33,11 +31,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
                 return ItemsFragment.CreateItemsFragment(Item.TYPE_INCOME);
 
             case PAGE_BALANCE:
-                BalanceFragment fragment = new BalanceFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("TYPE", PAGE_BALANCE);
-                fragment.setArguments(bundle);
-                return fragment;
+                return BalanceFragment.createFragment();
 
             default:
                 return null;

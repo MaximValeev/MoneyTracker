@@ -7,15 +7,21 @@
     tools:context="com.loftschool.moneytracker.ItemsFragment"
     android:background="@drawable/bg_pattern">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item"
-        android:paddingStart="@dimen/fragment_list_paddingStart"
-        android:paddingEnd="@dimen/fragment_list_paddingEnd"
-        android:paddingTop="@dimen/fragment_list_paddingTop"
-        android:paddingBottom="@dimen/fragment_list_paddingBottom" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item"
+            android:paddingStart="@dimen/fragment_list_paddingStart"
+            android:paddingEnd="@dimen/fragment_list_paddingEnd"
+            android:paddingTop="@dimen/fragment_list_paddingTop"
+            android:paddingBottom="@dimen/fragment_list_paddingBottom" />
+    </android.support.v4.widget.SwipeRefreshLayout>
     
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
