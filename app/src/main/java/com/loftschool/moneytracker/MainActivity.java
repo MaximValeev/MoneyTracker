@@ -24,16 +24,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         if(!((App)getApplication()).isLoggedIn()){
             startActivity(new Intent(this, AuthActivity.class));
-        } else {
+        }
+        else {
             pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager(), getResources()));
             tabs.setupWithViewPager(pager);
         }
+
+        Log.e("TAG", "onCreate: start");
     }
 }
