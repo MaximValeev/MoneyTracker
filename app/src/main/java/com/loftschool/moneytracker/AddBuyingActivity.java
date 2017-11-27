@@ -1,25 +1,20 @@
 package com.loftschool.moneytracker;
 
-import android.app.LoaderManager;
-import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.loftschool.moneytracker.api.AddResult;
 import com.loftschool.moneytracker.api.Api;
-
-import java.io.IOException;
 
 public class AddBuyingActivity extends AppCompatActivity {
 
@@ -117,13 +112,20 @@ public class AddBuyingActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra(RESULT_ITEM, new Item(titleOfBuying.getText().toString(),
-                      Integer.parseInt(priceOfBuying.getText().toString().replace(rouble, "")),
-                        type));
-                resultIntent.putExtra(EXTRA_TYPE, type);
-                setResult(RESULT_OK, resultIntent);
-                finish();
+                if(titleOfBuying.getText().toString().isEmpty() || priceOfBuying.getText().toString().isEmpty()){
+                    showError(getString(R.string.type_extense_income_sum_and_title));
+                } else if (priceOfBuying.getText().toString().equals("0")){
+                    showError(getString(R.string.sum_is_not_null));
+                } else {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra(RESULT_ITEM, new Item(titleOfBuying.getText().toString(),
+                            Integer.parseInt(priceOfBuying.getText().toString().replace(rouble, "")),
+                            type));
+                    resultIntent.putExtra(EXTRA_TYPE, type);
+                    Log.e("MYTAAAG", "onClickAdd type = " + type);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                }
             }
         });
 

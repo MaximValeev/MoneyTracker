@@ -26,9 +26,12 @@ import com.loftschool.moneytracker.api.Api;
 import com.loftschool.moneytracker.api.Result;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsFragment extends Fragment {
+
+    String TAG = "MYTAAG";
 
     private static final int LOADER_ITEMS = 0;
     private static final int LOADER_ADD = 1;
@@ -68,7 +71,7 @@ public class ItemsFragment extends Fragment {
         adapter = new ItemsAdapter(getContext());
         api = ((App) getActivity().getApplication()).getApi();
     }
-    
+
 
     @Nullable
     @Override
@@ -78,7 +81,6 @@ public class ItemsFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
         refresh = view.findViewById(R.id.refresh);
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -123,7 +125,6 @@ public class ItemsFragment extends Fragment {
 
         loadItems();
 
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +135,14 @@ public class ItemsFragment extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            loadItems();
+        }
     }
 
     private void loadItems(){
@@ -191,6 +200,7 @@ public class ItemsFragment extends Fragment {
 
             @Override
             public void onLoadFinished(Loader<AddResult> loader, AddResult data) {
+                loadItems();
                 adapter.updateId();
             }
 
@@ -201,15 +211,20 @@ public class ItemsFragment extends Fragment {
         }).forceLoad();
     }
 
-    private void removeItem(final Item item){
+    private void removeItem(final List<Item> itemList){
         getLoaderManager().restartLoader(LOADER_REMOVE, null, new LoaderManager.LoaderCallbacks<Result>() {
             @Override
             public Loader<Result> onCreateLoader(final int id, Bundle args) {
                 return new AsyncTaskLoader<Result>(getContext()) {
                     @Override
                     public Result loadInBackground() {
+                        Result res = null;
                         try {
-                            return api.remove(item.id).execute().body();
+                            for (Item item:itemList) {
+                                res = api.remove(item.id).execute().body();
+                            }
+                            itemList.clear();
+                            return res;
                         } catch (IOException e) {
                             e.printStackTrace();
                             return null;
@@ -238,6 +253,7 @@ public class ItemsFragment extends Fragment {
 
         if(requestCode==AddBuyingActivity.RC_ADD_ITEM && resultCode == AddBuyingActivity.RESULT_OK){
             Item item = (Item) data.getSerializableExtra(AddBuyingActivity.RESULT_ITEM);
+            this.type = (String) data.getSerializableExtra(AddBuyingActivity.EXTRA_TYPE);
             addItem(item);
             Toast.makeText(getContext(), item.name + " " + item.price, Toast.LENGTH_SHORT).show();
         }
@@ -283,9 +299,11 @@ public class ItemsFragment extends Fragment {
         dialog.setListener(new ConfirmDialogListener() {
             @Override
             public void onPositiveClick() {
+                List<Item> itemList = new ArrayList<>();
                 for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i-- ){
-                    removeItem(adapter.remove(adapter.getSelectedItems().get(i)));
+                    itemList.add(adapter.remove(adapter.getSelectedItems().get(i)));
                 }
+                removeItem(itemList);
                 actionMode.finish();
             }
 
