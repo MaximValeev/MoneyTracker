@@ -2,6 +2,10 @@ package com.loftschool.moneytracker;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,9 +104,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
 
         void bind(final Item item, Context context, final int position, boolean selected, final ItemsAdapterListener listener){
 //            Spannable colorCurrency = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
-            String currencyPlus = String.valueOf(item.price) + context.getString(R.string.currency_symbol);
+//            String currencyPlus = String.valueOf(item.price) + context.getString(R.string.currency_symbol);
 //            colorCurrency.setSpan(new ForegroundColorSpan(Color.rgb(109, 111, 114)),colorCurrency.length()-1, colorCurrency.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+            Spannable currencyPlus = new SpannableString(String.valueOf(item.price) + context.getString(R.string.currency_symbol));
+            currencyPlus.setSpan(new RelativeSizeSpan(0.75f),currencyPlus.length()-1, currencyPlus.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             name.setText(item.name);
             price.setText(currencyPlus);
 
